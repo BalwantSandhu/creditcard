@@ -4,10 +4,11 @@ import { JsonPipe, NgIf } from '@angular/common';
 import { ɵEmptyOutletComponent } from "@angular/router";
 import { InputComponent } from "../input/input.component";
 import { DateFormControl } from '../date-form-control';
+import { CardComponent } from "../card/card.component";
 
 @Component({
   selector: 'app-card-form',
-  imports: [ReactiveFormsModule, JsonPipe, NgIf, ɵEmptyOutletComponent, InputComponent],
+  imports: [ReactiveFormsModule, JsonPipe, NgIf, ɵEmptyOutletComponent, InputComponent, CardComponent],
   templateUrl: './card-form.component.html',
   styleUrl: './card-form.component.css'
 })
@@ -23,6 +24,16 @@ export class CardFormComponent {
   constructor(){}
 
   onSubmit(){
-    console.log('forms ubitted');
+    console.log('forms subitted');
+  }
+
+  onClickReset(){
+    this.cardForm.reset();
+
+    Object.values(this.cardForm.controls).forEach(control => {
+      control.markAsPristine();
+      control.markAsUntouched();
+      control.updateValueAndValidity({ emitEvent: false });
+    });
   }
 }

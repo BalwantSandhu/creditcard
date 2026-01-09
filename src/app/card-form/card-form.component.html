@@ -1,25 +1,51 @@
-<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
-    <app-input 
-        [control]="cardForm.controls.name" 
-        label="Name">
-    </app-input>
-    <app-input 
-        [control]="cardForm.controls.cardNumber" 
-        label="Card Number">
-    </app-input>
-    <app-input 
-        [control]="cardForm.controls.expiration" 
-        label="Expiration (MM/YY)">
-    </app-input>
-    <app-input 
-        [control]="cardForm.controls.securityCode" 
-        label="Security Code">
-    </app-input>
-    <button class="button is-primary" [disabled]="cardForm.invalid" type="submit">Submit</button>
-</form>
-
-<hr />
-
-<div> Form Contents: {{cardForm.value | json}} </div>
-<div> Form is valid: {{cardForm.valid}}</div>
-<div> Errors Around Name: {{cardForm.controls.name.errors | json}}
+<section class="section">
+    <div class="container">
+        <h1 class="title has-text-centered">
+            Payment Form
+        </h1>
+        <div class="columns">
+            <div class="column">
+                <app-card 
+                    [name]="cardForm.controls.name.value"
+                    [cardNumber]="cardForm.get('cardNumber').value"
+                    [expiration]="cardForm.value.expiration"
+                ></app-card>
+            </div>
+            <div class="column">
+                <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+                    <app-input 
+                        [control]="cardForm.controls.name" 
+                        label="Name">
+                    </app-input>
+                    <app-input 
+                        [control]="cardForm.controls.cardNumber" 
+                        label="Card Number"
+                        mask="0000 0000 0000 0000">
+                    </app-input>
+                    <div class="columns">
+                        <div class="column">   
+                            <app-input 
+                                [control]="cardForm.controls.expiration" 
+                                label="Expiration (MM/YY)">
+                            </app-input>
+                        </div>
+                        <div class="column">
+                            <app-input 
+                                [control]="cardForm.controls.securityCode" 
+                                label="Security Code">
+                            </app-input>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button class="button is-primary" [disabled]="cardForm.invalid" type="submit">
+                            Submit
+                        </button>
+                        <button class="button is-warning" [disabled]="cardForm.untouched" type="button" (click)="onClickReset()">
+                            Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
