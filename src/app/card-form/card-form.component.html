@@ -40,7 +40,7 @@
                         <button class="button is-primary" [disabled]="cardForm.invalid" type="submit">
                             Submit
                         </button>
-                        <button class="button is-warning" [disabled]="cardForm.untouched" type="button" (click)="onClickReset()">
+                        <button class="button is-warning" [disabled]="cardForm.pristine" type="button" (click)="onClickReset()">
                             Reset
                         </button>
                     </div>
